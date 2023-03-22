@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: _title,
       theme: ThemeData(
-        primarySwatch: Colors.yellow,
+        primarySwatch: Colors.deepOrange,
       ),
       debugShowCheckedModeBanner: false,
       home: const MyHomePage(),
@@ -20,15 +20,17 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({Key? key}) : super(key: key);
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -78,17 +80,41 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.pop(context);
               },
             ),
+            AboutListTile(
+              // <-- SEE HERE
+              icon: Icon(
+                Icons.info,
+              ),
+              child: Text('Acerca de...'),
+              applicationIcon: Icon(
+                Icons.local_play,
+              ),
+              applicationName: 'Super duper inicio perron sisis',
+              applicationVersion: '1.0',
+              applicationLegalese: '© 2023 Disni',
+              aboutBoxChildren: [Text("Me gusta el ketchup")],
+            ),
           ],
         ),
       ),
       appBar: AppBar(
         title: const Text('Act3 Drawer Ávila'),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(
           children: [
             const SizedBox(
               height: 50,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                _key.currentState!.openDrawer(); //<-- SEE HERE
+              },
+              child: const Text(
+                'Abrir Drawer',
+                style: TextStyle(fontSize: 24),
+              ),
             ),
           ],
         ),
