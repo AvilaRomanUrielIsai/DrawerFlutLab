@@ -20,17 +20,15 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({super.key});
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _key,
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -99,22 +97,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       appBar: AppBar(
         title: const Text('Act3 Drawer Ávila'),
-        centerTitle: true,
       ),
       body: Center(
         child: Column(
           children: [
             const SizedBox(
               height: 50,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                _key.currentState!.openDrawer(); //<-- SEE HERE
-              },
-              child: const Text(
-                'Abrir Drawer',
-                style: TextStyle(fontSize: 24),
-              ),
             ),
           ],
         ),
